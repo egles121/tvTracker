@@ -15,6 +15,12 @@
         >
 
         <activity
+            android:name=".MainScreen"
+            android:exported="false" />
+        <activity
+            android:name=".signUp"
+            android:exported="false" />
+        <activity
             android:name=".notifications"
             android:exported="false" />
         <activity
