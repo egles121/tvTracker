@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TvTracker">
         <activity
+            android:name=".MainScreen"
+            android:exported="false" />
+        <activity
             android:name=".signUp"
             android:exported="false" />
         <activity
