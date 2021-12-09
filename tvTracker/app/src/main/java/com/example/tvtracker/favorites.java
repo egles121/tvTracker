@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.example.tvtracker.DB.TvShowsQuery;
+
 import java.util.Calendar;
 
 public class favorites extends AppCompatActivity {
@@ -26,6 +28,10 @@ public class favorites extends AppCompatActivity {
 
         notifications = (ImageButton) findViewById(R.id.button_notificationsFav);
         notifications.setOnClickListener(v -> userNotifications());
+
+        TextView tx1 = findViewById(R.id. list_tvshow1);
+        tx1.setText(TvShowsQuery.getName());
+
     }
 
     //change greeting based on hour of day
@@ -58,4 +64,8 @@ public class favorites extends AppCompatActivity {
         overridePendingTransition(0,0);
         startActivity(intent);
     }
+
+
+
+
 }

@@ -11,7 +11,7 @@ public class SqlConnection {
     private static final String DbUrl = "bootcamptvtracker.cgnkkelv2t0b.us-east-2.rds.amazonaws.com/TVtrackerDB";
     Connection connection;
 
-    public SqlConnection() {
+    private SqlConnection() {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
@@ -24,8 +24,6 @@ public class SqlConnection {
             Log.e("SQL Error ", e.getMessage());
         }
     }
-
-    // TODO remove from MainActivity.java code that creates Connection and implement a method that does that in one line
 
     public static Connection connect() {
         SqlConnection sqlConnection = new SqlConnection();
