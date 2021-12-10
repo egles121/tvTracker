@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:context=".signup"
     android:background="@drawable/gradient_background">
 
     <TextView
@@ -25,7 +26,7 @@
         app:layout_constraintVertical_bias="0.135" />
 
     <EditText
-        android:id="@+id/emailSignUp"
+        android:id="@+id/email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
@@ -39,7 +40,7 @@
         android:singleLine="true"
         android:textColor="@android:color/white"
         android:textColorHint="@android:color/white"
-        app:layout_constraintBottom_toTopOf="@+id/usernameSignUp"
+        app:layout_constraintBottom_toTopOf="@+id/new_username"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.526"
         app:layout_constraintStart_toStartOf="parent"
@@ -47,7 +48,7 @@
         app:layout_constraintVertical_bias="0.717" />
 
     <EditText
-        android:id="@+id/usernameSignUp"
+        android:id="@+id/new_username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
@@ -62,7 +63,7 @@
         android:singleLine="true"
         android:textColor="@android:color/white"
         android:textColorHint="@android:color/white"
-        app:layout_constraintBottom_toTopOf="@id/passwordSignUp"
+        app:layout_constraintBottom_toTopOf="@id/new_password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.526"
         app:layout_constraintStart_toStartOf="parent"
@@ -70,7 +71,7 @@
         app:layout_constraintVertical_bias="0.88" />
 
     <EditText
-        android:id="@+id/passwordSignUp"
+        android:id="@+id/new_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
@@ -86,7 +87,7 @@
         android:singleLine="true"
         android:textColor="@android:color/white"
         android:textColorHint="@android:color/white"
-        app:layout_constraintBottom_toTopOf="@+id/button_signUpScreen"
+        app:layout_constraintBottom_toTopOf="@+id/button_signupScreen"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.526"
         app:layout_constraintStart_toStartOf="parent"
@@ -94,7 +95,7 @@
         app:layout_constraintVertical_bias="0.864" />
 
     <Button
-        android:id="@+id/button_signUpScreen"
+        android:id="@+id/button_signupScreen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="#341d7e"
