@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageButton;
 
-public class notifications extends MainActivity{
+public class Notifications extends MainActivity{
 private ImageButton favorites;
 private Button logout;
 
@@ -22,7 +22,7 @@ private Button logout;
     }
 
     public void userFavorites(){
-        Intent intent = new Intent(this, favorites.class);
+        Intent intent = new Intent(this, Favorites.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         overridePendingTransition(0,0);
         startActivity(intent);

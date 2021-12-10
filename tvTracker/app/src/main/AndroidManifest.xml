@@ -18,16 +18,16 @@
             android:name=".MainScreen"
             android:exported="false" />
         <activity
-            android:name=".signup"
+            android:name=".SignUp"
             android:exported="false" />
         <activity
-            android:name=".notifications"
+            android:name=".Notifications"
             android:exported="false" />
         <activity
-            android:name=".favorites"
+            android:name=".Favorites"
             android:exported="false" />
         <activity
-            android:name=".login"
+            android:name=".Login"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

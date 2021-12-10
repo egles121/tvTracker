@@ -2,13 +2,13 @@ package com.example.tvtracker;
 
 import android.widget.Button;
 
-public class cardsExampleItem {
+public class ExampleItem {
     private String mtx1;
     private String mtx2;
     private Button mbtn;
 
 
-    public cardsExampleItem(String txt1, String txt2, Button btn){
+    public ExampleItem(String txt1, String txt2, Button btn){
         mtx1=txt1;
         mtx2 = txt2;
         mbtn=btn;

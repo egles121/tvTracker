@@ -7,7 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class users extends SqlQuery {
+public class Users extends SqlQuery {
 
     public static String insertDetails(String username, String password, String email) {
         String query = "INSERT INTO Users (user_id, username, password, email) VALUES (null, ?, ?, ?)";

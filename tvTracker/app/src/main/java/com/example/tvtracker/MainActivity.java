@@ -3,9 +3,7 @@ package com.example.tvtracker;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 
@@ -26,12 +24,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void openLoginActivity(){
-        Intent intent = new Intent(this, login.class);
+        Intent intent = new Intent(this, Login.class);
         startActivity(intent);
     }
 
     public void openSignUpActivity(){
-        Intent intent = new Intent(this, signup.class);
+        Intent intent = new Intent(this, SignUp.class);
         startActivity(intent);
     }
 }

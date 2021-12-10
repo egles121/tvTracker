@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient_background"
-    tools:context=".notifications"
+    tools:context=".Notifications"
     tools:layout_editor_absoluteX="1dp"
     tools:layout_editor_absoluteY="-3dp">
 

@@ -11,8 +11,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class exampleAdapter extends RecyclerView.Adapter<exampleAdapter.ExampleViewHolder> {
-    private ArrayList <cardsExampleItem> mExampleList;
+public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleViewHolder> {
+    private ArrayList <ExampleItem> mExampleList;
 
     public static class ExampleViewHolder extends RecyclerView.ViewHolder{
         public TextView mTextView1;
@@ -26,7 +26,7 @@ public class exampleAdapter extends RecyclerView.Adapter<exampleAdapter.ExampleV
         }
     }
 
-    public exampleAdapter(ArrayList<cardsExampleItem> exampleList) {
+    public ExampleAdapter(ArrayList<ExampleItem> exampleList) {
         mExampleList = exampleList;
     }
 
@@ -41,7 +41,7 @@ public class exampleAdapter extends RecyclerView.Adapter<exampleAdapter.ExampleV
     @Override
     public void onBindViewHolder(@NonNull ExampleViewHolder holder, int position) {
         //position = shows what item is on the list
-        cardsExampleItem currentItem = mExampleList.get(position); //we get the item at the position we pass
+        ExampleItem currentItem = mExampleList.get(position); //we get the item at the position we pass
 
         holder.mTextView1.setText(currentItem.getText1()); //example viewholder
         holder.mTextView2.setText(currentItem.getText2());
@@ -51,6 +51,6 @@ public class exampleAdapter extends RecyclerView.Adapter<exampleAdapter.ExampleV
 
     @Override
     public int getItemCount() {
-        return mExampleList.size();  //how many items in our list
-    }
+        return mExampleList.size();
+    }  //how many items in our list
 }

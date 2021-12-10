@@ -2,22 +2,15 @@ package com.example.tvtracker;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.tvtracker.DB.SqlConnection;
-import com.example.tvtracker.DB.SqlQuery;
-import com.example.tvtracker.DB.users;
+import com.example.tvtracker.DB.Users;
 
-import java.sql.Connection;
-import java.sql.SQLException;
-
-public class signup extends AppCompatActivity {
+public class SignUp extends AppCompatActivity {
     private Button signup;
 
     EditText ET_username, ET_password, ET_email;
@@ -45,12 +38,12 @@ public class signup extends AppCompatActivity {
                 password = ET_password.getText().toString();
                 email = ET_email.getText().toString();
 
-                if (users.userExists(username) == false) {
-                    users.insertDetails(username, password, email);
-                    Intent intent = new Intent (this,login.class);
+                if (Users.userExists(username) == false) {
+                    Users.insertDetails(username, password, email);
+                    Intent intent = new Intent (this, Login.class);
                     startActivity(intent);
                 } else {
-                    Toast.makeText(signup.this, "This username already exists", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUp.this, "This username already exists", Toast.LENGTH_SHORT).show();
                 }
 
             } catch (Exception e) {

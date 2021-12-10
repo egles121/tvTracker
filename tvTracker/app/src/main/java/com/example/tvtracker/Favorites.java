@@ -13,7 +13,7 @@ import com.example.tvtracker.DB.TvShowsQuery;
 
 import java.util.Calendar;
 
-public class favorites extends AppCompatActivity {
+public class Favorites extends AppCompatActivity {
     private TextView greeting;
     private Button logout;
     private ImageButton notifications;
@@ -59,7 +59,7 @@ public class favorites extends AppCompatActivity {
     }
 
     public void userNotifications(){
-        Intent intent = new Intent(this, notifications.class);
+        Intent intent = new Intent(this, Notifications.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         overridePendingTransition(0,0);
         startActivity(intent);
