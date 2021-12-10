@@ -37,7 +37,7 @@ public class TvShowsQuery extends SqlQuery {
 
     // return name of the show based on provided id
     public static String getName(int id) {
-        String query = "SELECT name FROM tv_shows WHERE id = ?";
+        String query = "SELECT name FROM tv_shows WHERE id = ?;";
         String result = "";
 
         Connection connection = SqlConnection.connect();
@@ -45,7 +45,7 @@ public class TvShowsQuery extends SqlQuery {
             if (connection != null) {
                 PreparedStatement prepStatement = connection.prepareStatement(query);
                 prepStatement.setInt(1, id);
-                ResultSet resultSet = prepStatement.executeQuery(query);
+                ResultSet resultSet = prepStatement.executeQuery();
                 while (resultSet.next()) {
                     result = resultSet.getString("name");
                 }
