@@ -7,10 +7,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
-public class login extends AppCompatActivity {
+public class login extends MainActivity {
     private Button login;
     private EditText usernameInput;
     private EditText passwordInput;
@@ -49,8 +48,8 @@ public class login extends AppCompatActivity {
     }
 
     public void getCredentials() {
-        usernameInput = (EditText) findViewById(R.id.username);
-        passwordInput = (EditText) findViewById(R.id.password);
+        usernameInput = (EditText) findViewById(R.id.usernameSignUp);
+        passwordInput = (EditText) findViewById(R.id.passwordSignUp);
         setUsername(usernameInput.getText().toString());
         setPassword(passwordInput.getText().toString());
     }

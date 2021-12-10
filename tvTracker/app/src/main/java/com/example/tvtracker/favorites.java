@@ -2,9 +2,9 @@ package com.example.tvtracker;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -24,7 +24,7 @@ public class favorites extends AppCompatActivity {
         userGreeting();
 
         logout = (Button) findViewById(R.id. button_logoutFavorites);
-        logout.setOnClickListener(v -> userLogout());
+        logout.setOnClickListener(v -> logoutFunction(this));
 
         notifications = (ImageButton) findViewById(R.id.button_notificationsFav);
         notifications.setOnClickListener(v -> userNotifications());
@@ -53,8 +53,8 @@ public class favorites extends AppCompatActivity {
         }
     }
 
-    public void userLogout(){
-        Intent intent = new Intent(this, MainActivity.class);
+    public void logoutFunction (Activity activity){
+        Intent intent = new Intent(activity, MainActivity.class);
         startActivity(intent);
     }
 

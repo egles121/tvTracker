@@ -37,13 +37,13 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/button_login"
+        android:id="@+id/button_loginStart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
         android:backgroundTint="#341d7e"
         android:text="LOG IN"
-        app:layout_constraintBottom_toTopOf="@+id/button_signUp"
+        app:layout_constraintBottom_toTopOf="@+id/button_signUpStart"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -51,7 +51,7 @@
         app:layout_constraintVertical_bias="0.62" />
 
     <Button
-        android:id="@+id/button_signUp"
+        android:id="@+id/button_signUpStart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
