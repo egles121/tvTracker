@@ -30,7 +30,7 @@ public class favorites extends AppCompatActivity {
         notifications.setOnClickListener(v -> userNotifications());
 
         TextView tx1 = findViewById(R.id. list_tvshow1);
-        tx1.setText(TvShowsQuery.getName());
+        tx1.setText(TvShowsQuery.getName(251));
 
     }
 
