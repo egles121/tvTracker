@@ -53,8 +53,10 @@ public class Login extends MainActivity {
     }
 
     public void userLogin() {
-        if (usernameString.equals("admin") && passwordString.equals("123456")){
+        if (usernameString.equals("1") && passwordString.equals("1")){
             Toast.makeText(Login.this, "Correct login details", Toast.LENGTH_SHORT).show();
+            String title = getApplicationContext().toString();
+            Toast.makeText(getApplicationContext(), title, Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(this, Favorites.class);
                 startActivity(intent);
         }
