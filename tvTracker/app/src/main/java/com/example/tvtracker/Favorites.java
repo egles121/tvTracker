@@ -21,6 +21,10 @@ import com.example.tvtracker.DB.TvShowsQuery;
 import com.example.tvtracker.REST.RequestSingleton;
 import com.example.tvtracker.REST.RestRequests;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.Calendar;
 
 public class Favorites extends AppCompatActivity {
@@ -40,6 +44,9 @@ public class Favorites extends AppCompatActivity {
 
         notifications = (ImageButton) findViewById(R.id.button_notificationsFav);
         notifications.setOnClickListener(v -> userNotifications());
+
+        main = (Button) findViewById(R.id.button_mainFav);
+        main.setOnClickListener(v -> mainScreen());
 
         // TextView tx1 = findViewById(R.id. list_tvshow1);
         TextView tx2 = findViewById(R.id. list_tvshow2);
@@ -113,15 +120,20 @@ public class Favorites extends AppCompatActivity {
         }
     }
 
-    public void logoutFunction (Activity activity){
+    public void logoutFunction (Activity activity) {
         Intent intent = new Intent(activity, MainActivity.class);
         startActivity(intent);
     }
 
-    public void userNotifications(){
+    public void userNotifications() {
         Intent intent = new Intent(this, Notifications.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         overridePendingTransition(0,0);
+        startActivity(intent);
+    }
+
+    public void mainScreen() {
+        Intent intent = new Intent(this, Test.class);
         startActivity(intent);
     }
 

@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ScrollView;
 import android.widget.Toast;
+import android.content.Intent;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -38,6 +39,10 @@ private RecyclerView.LayoutManager mLayoutManager; // assigns single items in ou
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
+
+        favorites = (Button) findViewById(R.id.button_favoritesMain);
+        favorites.setOnClickListener(v -> favoritesScreen());
+
         Button btn = new Button(this);
         ArrayList<ExampleItem> exampleList = new ArrayList<>();
         exampleList.add(new ExampleItem("test", "test2", btn));
@@ -59,7 +64,7 @@ private RecyclerView.LayoutManager mLayoutManager; // assigns single items in ou
         /*for (int i = 250; i <= 260; i++) {
             //loop through Ids
             exampleList.add(new ExampleItem(TvShowsQuery.getName(i), "2005-2013", btn));
-         }
+         }*/
         //exampleList.add(new cardsExampleItem(TvShowsQuery.getName(251), "2005-2013", btn));
         //exampleList.add(new cardsExampleItem(TvShowsQuery.getName(252), "2008-2013", btn));
         //exampleList.add(new cardsExampleItem("Squid Game", "2021", btn));
@@ -72,6 +77,8 @@ private RecyclerView.LayoutManager mLayoutManager; // assigns single items in ou
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
 
+
+        //say when reach the end of the scroll
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
