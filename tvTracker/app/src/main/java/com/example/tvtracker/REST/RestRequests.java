@@ -85,27 +85,40 @@ public class RestRequests {
 
                 try {
 
-                    TvShow firstTvShow = new TvShow();
+                    for (int i = 0; i < response.length(); i++) {
+                        TvShow firstTvShow = new TvShow();
 
                     JSONObject firstTvShowAPI = (JSONObject) response.get(0); //we get the first Tv Show object from the array
 
-                    JSONObject showObject = firstTvShowAPI.getJSONObject("show"); //we get the show object from the tv show object we received
-                    Show show = new Show();
-                    show.setId(showObject.getInt("id"));
-                    show.setUrl(showObject.getString("url"));
-                    show.setName(showObject.getString("name"));
-                    show.setType(showObject.getString("type"));
-                    show.setLanguage(showObject.getString("language"));
+                        JSONObject showObject = firstTvShowAPI.getJSONObject("show"); //we get the show object from the tv show object we received
+                        Show show = new Show();
+                        show.setId(showObject.getInt("id"));
+                        show.setUrl(showObject.getString("url"));
+                        show.setName(showObject.getString("name"));
+                        show.setType(showObject.getString("type"));
+                        show.setLanguage(showObject.getString("language"));
 
 
-                    firstTvShow.setScore(firstTvShowAPI.getDouble("score"));
-                    firstTvShow.setShow(show);
+                        firstTvShow.setScore(firstTvShowAPI.getDouble("score"));
+                        firstTvShow.setShow(show);
 
-                    tvShowListResponse.onResponse(firstTvShow);
+                        tvShow.add(firstTvShow); //add tvShow to the list
+                        //Toast.makeText(context, firstTvShow.toString(), Toast.LENGTH_LONG).show();
+                    }
 
-                } catch (JSONException e){
-                    e.printStackTrace();
-                }
+                    ArrayList<String> result  = new ArrayList<String>();
+                    String name = "";
+                    for (int i = 0; i < tvShow.size(); i++) {
+                        name = tvShow.get(i).getShow().getName();
+                        result.add(name);
+                    }
+
+                        tvShowListResponse.onResponse(result);
+
+                    } catch(JSONException e){
+                        e.printStackTrace();
+                    }
+
             }
         }, new Response.ErrorListener() {
             @Override

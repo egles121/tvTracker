@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -25,6 +27,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class Favorites extends AppCompatActivity {
@@ -79,18 +82,27 @@ public class Favorites extends AppCompatActivity {
 
         //Return a TV show name
         RestRequests restRequests = new RestRequests(Favorites.this);
+        //get the favorite tv shows array from the database
+        ArrayList<Integer> favoriteTvShows = User_dataQuery.favoriteShows(userId);
+        ArrayList<String> favorites = new ArrayList<>();
 
-        restRequests.getShowName(3, new RestRequests.VolleyResponseListener() {
-            @Override
-            public void onError(String message) {
-                Toast.makeText(Favorites.this, "Error23", Toast.LENGTH_LONG).show();
-            }
-            @Override
-            public void onResponse (String tvShowName) {
-                //Toast.makeText(Favorites.this, "Error23", Toast.LENGTH_LONG).show();
-                tx3.setText(tvShowName);
-            }
-        });
+
+        for (int i = 0; i < favoriteTvShows.size(); i++) {
+            restRequests.getShowName(favoriteTvShows.get(i), new RestRequests.VolleyResponseListener() {
+                @Override
+                public void onError(String message) {
+                    Toast.makeText(Favorites.this, "Error at Favorites request", Toast.LENGTH_LONG).show();
+                }
+                @Override
+                public void onResponse (String tvShowName) {
+                    favorites.add(tvShowName);
+                    ArrayAdapter arrayAdapter = new ArrayAdapter(Favorites.this, android.R.layout.simple_list_item_multiple_choice, favorites);
+                    list.setAdapter(arrayAdapter);
+                }
+            });
+
+        }
+        Toast.makeText(Favorites.this, favorites.toString(), Toast.LENGTH_SHORT).show();
 
 
 

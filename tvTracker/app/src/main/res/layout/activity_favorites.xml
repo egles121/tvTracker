@@ -89,7 +89,7 @@
         android:id="@+id/greeting3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="124dp"
         android:drawableLeft="@drawable/ic_baseline_star_24_purple"
         android:drawablePadding="10dp"
         android:fontFamily="@font/roboto_medium"
@@ -99,18 +99,16 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.27" />
+        app:layout_constraintVertical_bias="0.166" />
 
     <Button
         android:id="@+id/button_homeFavorites"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginEnd="32dp"
         android:backgroundTint="#341d7e"
         android:text="home"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/button_logoutFavorites"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.976" />
@@ -129,116 +127,26 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.976" />
 
-    <ScrollView
-        android:id="@+id/scrollView3"
-        android:layout_width="322dp"
-        android:layout_height="361dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/button_logoutFavorites"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/greeting3"
-        app:layout_constraintVertical_bias="0.123">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/list_tvshow1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_medium"
-                android:paddingStart="20dp"
-                android:paddingTop="20dp"
-                android:paddingEnd="20dp"
-                android:paddingBottom="20dp"
-                android:text="the Office"
-                android:textColor="@color/white"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/list_tvshow2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_medium"
-                android:paddingStart="20dp"
-                android:paddingTop="20dp"
-                android:paddingEnd="20dp"
-                android:paddingBottom="20dp"
-                android:text="the Office"
-                android:textColor="@color/white"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/list_tvshow3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_medium"
-                android:paddingStart="20dp"
-                android:paddingTop="20dp"
-                android:paddingEnd="20dp"
-                android:paddingBottom="20dp"
-                android:text="the Office"
-                android:textColor="@color/white"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/list_tvshow4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_medium"
-                android:paddingStart="20dp"
-                android:paddingTop="20dp"
-                android:paddingEnd="20dp"
-                android:paddingBottom="20dp"
-                android:text="the Office"
-                android:textColor="@color/white"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/list_tvshow5"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_medium"
-                android:paddingStart="20dp"
-                android:paddingTop="20dp"
-                android:paddingEnd="20dp"
-                android:paddingBottom="20dp"
-                android:text="the Office"
-                android:textColor="@color/white"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/list_tvshow6"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_medium"
-                android:paddingStart="20dp"
-                android:paddingTop="20dp"
-                android:paddingEnd="20dp"
-                android:paddingBottom="20dp"
-                android:text="the Office"
-                android:textColor="@color/white"
-                android:textSize="20sp" />
-
-        </LinearLayout>
-    </ScrollView>
-
     <Button
         android:id="@+id/button_mainFav"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Main"
-        app:layout_constraintBottom_toTopOf="@+id/scrollView3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.921"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button_logoutFavorites"
+        app:layout_constraintHorizontal_bias="0.807"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.522" />
+        app:layout_constraintTop_toBottomOf="@+id/favorites_list"
+        app:layout_constraintVertical_bias="0.529" />
+
+    <ListView
+        android:id="@+id/favorites_list"
+        android:layout_width="350dp"
+        android:layout_height="466dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/button_logoutFavorites"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/greeting3" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,29 +2,16 @@ package com.example.tvtracker;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ScrollView;
 import android.widget.Toast;
 import android.content.Intent;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
-import com.example.tvtracker.DB.TvShowsQuery;
-import com.example.tvtracker.REST.RequestSingleton;
 import com.example.tvtracker.REST.RestRequests;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -40,7 +27,7 @@ private RecyclerView.LayoutManager mLayoutManager; // assigns single items in ou
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
 
-        favorites = (Button) findViewById(R.id.button_favoritesMain);
+        favorites = (Button) findViewById(R.id.button_home_fav);
         favorites.setOnClickListener(v -> favoritesScreen());
 
         Button btn = new Button(this);
