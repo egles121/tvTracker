@@ -30,9 +30,12 @@ private RecyclerView.LayoutManager mLayoutManager; // assigns single items in ou
         favorites = (Button) findViewById(R.id.button_home_fav);
         favorites.setOnClickListener(v -> favoritesScreen());
 
+        mScrollView = (ScrollView) findViewById(R.id.scrollView2);
+        mRecyclerView = findViewById(R.id.recyclerView);
+
         Button btn = new Button(this);
-        ArrayList<ExampleItem> exampleList = new ArrayList<>();
-        exampleList.add(new ExampleItem("test", "test2", btn));
+        //ArrayList<ExampleItem> exampleList = new ArrayList<>();
+        //exampleList.add(new ExampleItem("test", "test2", btn));
 
         RestRequests restRequests = new RestRequests(Test.this);
 
@@ -43,8 +46,12 @@ private RecyclerView.LayoutManager mLayoutManager; // assigns single items in ou
             }
 
             @Override
-            public void onResponse(TvShow tvShow) {
-                Toast.makeText(Test.this, tvShow.toString(), Toast.LENGTH_LONG).show();
+            public void onResponse(ArrayList<String> result) {
+                //Toast.makeText(Test.this, tvShow.toString(), Toast.LENGTH_LONG).show();
+                ArrayAdapter arrayAdapter = new ArrayAdapter(Test.this, android.R.layout.simple_list_item_1, result);
+                //mRecyclerView.setAdapter(arrayAdapter);
+
+
             }
         });
 
@@ -56,13 +63,13 @@ private RecyclerView.LayoutManager mLayoutManager; // assigns single items in ou
         //exampleList.add(new cardsExampleItem(TvShowsQuery.getName(252), "2008-2013", btn));
         //exampleList.add(new cardsExampleItem("Squid Game", "2021", btn));
 
-        mRecyclerView = findViewById(R.id.recyclerView);
-        mRecyclerView.setHasFixedSize(true); // if we know
-        mLayoutManager = new LinearLayoutManager(this);
-        mAdapter = new ExampleAdapter(exampleList);
 
-        mRecyclerView.setLayoutManager(mLayoutManager);
-        mRecyclerView.setAdapter(mAdapter);
+        //mRecyclerView.setHasFixedSize(true); // if we know
+        //mLayoutManager = new LinearLayoutManager(this);
+        //mAdapter = new ExampleAdapter(exampleList);
+
+        //mRecyclerView.setLayoutManager(mLayoutManager);
+        //mRecyclerView.setAdapter(mAdapter);
 
 
         //say when reach the end of the scroll

@@ -8,8 +8,10 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,21 +22,25 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.tvtracker.DB.TvShowsQuery;
+import com.example.tvtracker.DB.User_dataQuery;
 import com.example.tvtracker.REST.RequestSingleton;
 import com.example.tvtracker.REST.RestRequests;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 
 public class Favorites extends AppCompatActivity {
     private TextView greeting;
+    private TextView nick;
     private Button logout;
     private ImageButton notifications;
     private Button main;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,31 +60,11 @@ public class Favorites extends AppCompatActivity {
         // TextView tx1 = findViewById(R.id. list_tvshow1);
         TextView tx2 = findViewById(R.id. list_tvshow2);
         TextView tx3 = findViewById(R.id. list_tvshow3);
-        // tx1.setText(TvShowsQuery.getName(251));
+        ListView list = (ListView) findViewById(R.id. favorites_list) ;
 
-        //RequestQueue requestQueue = Volley.newRequestQueue(Favorites.this);
-
-
-        String url = "https://api.tvmaze.com/shows/1";
-
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                try {
-                    String name = response.getString("name");
-                    tx2.setText(name);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                tx2.setText("something wrong");
-            }
-        });
-        RequestSingleton.getInstance(Favorites.this).addToRequestQueue(request);
+        nick = (TextView) findViewById(R.id.greeting2);
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(Favorites.this);
+        int userId = sharedPref.getInt("userId", 646);
 
         //Return a TV show name
         RestRequests restRequests = new RestRequests(Favorites.this);
@@ -113,6 +99,7 @@ public class Favorites extends AppCompatActivity {
 
     }
 
+
     //change greeting based on hour of day
     public void userGreeting(){
         greeting = (TextView) findViewById(R.id.greeting);
@@ -145,11 +132,8 @@ public class Favorites extends AppCompatActivity {
     }
 
     public void mainScreen() {
-        Intent intent = new Intent(this, Test.class);
+        Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
     }
-
-
-
 
 }
