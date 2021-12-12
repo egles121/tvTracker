@@ -32,7 +32,6 @@ public class SignUp extends AppCompatActivity {
     }
 
     public void userSignUp() {
-
             try {
                 username = ET_username.getText().toString();
                 password = ET_password.getText().toString();
