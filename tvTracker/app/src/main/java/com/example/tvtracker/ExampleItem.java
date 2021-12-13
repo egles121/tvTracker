@@ -1,17 +1,18 @@
 package com.example.tvtracker;
 
-import android.widget.Button;
+
+import android.widget.ImageView;
 
 public class ExampleItem {
     private String mtx1;
     private String mtx2;
-    private Button mbtn;
+    public ImageView favoriteStar;
 
 
-    public ExampleItem(String txt1, String txt2, Button btn){
+    public ExampleItem(String txt1, String txt2, ImageView star){
         mtx1=txt1;
         mtx2 = txt2;
-        mbtn=btn;
+        favoriteStar = star;
     }
 
     public String getText1(){
@@ -22,6 +23,6 @@ public class ExampleItem {
         return mtx2;
     }
 
-    public Button getMbtn() {return mbtn;}
+    public ImageView getStar() {return favoriteStar;}
 
 }

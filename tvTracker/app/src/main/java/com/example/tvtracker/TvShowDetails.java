@@ -1,8 +1,21 @@
 package com.example.tvtracker;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.tvtracker.DB.User_dataQuery;
+import com.example.tvtracker.REST.RestRequests;
+
+import java.util.ArrayList;
 
 public class TvShowDetails extends AppCompatActivity {
     private ArrayList<TvShowItem> list = new ArrayList<>();

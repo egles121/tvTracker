@@ -1,6 +1,8 @@
 package com.example.tvtracker;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -8,9 +10,13 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CheckedTextView;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,10 +42,13 @@ import java.util.Calendar;
 
 public class Favorites extends AppCompatActivity {
     private TextView greeting;
-    private TextView nick;
     private Button logout;
     private ImageButton notifications;
     private Button main;
+    private RecyclerView mRecyclerView;
+    private ExampleAdapter mAdapter;// bridge between our data and recycler view (cant laod all items at once in recyclerview, adapter puts as many as we need
+    private RecyclerView.LayoutManager mLayoutManager; // assigns single items in our list
+    private ArrayList<ExampleItem> list = new ArrayList<>();
 
 
     @Override
