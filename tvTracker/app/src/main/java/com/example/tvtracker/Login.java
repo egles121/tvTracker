@@ -38,8 +38,7 @@ public class Login extends MainActivity {
         return usernameString;
     }
 
-    public void setUsername (String usernameString) {
-        this.usernameString=usernameString;
+    public void setUsername (String usernameString) {this.usernameString=usernameString;
     }
 
     public String getPassword() {
@@ -70,8 +69,6 @@ public class Login extends MainActivity {
             SharedPreferences.Editor editor = sharedPref.edit();
             editor.putInt("userId", userId);
             editor.apply();
-
-
 
             Intent intent = new Intent(this, Favorites.class);
             startActivity(intent);

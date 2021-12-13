@@ -13,10 +13,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TvTracker">
         <activity
-            android:name=".HomeActivity"
+            android:name=".TvShowDetails"
             android:exported="false" />
         <activity
-            android:name=".MainScreen"
+            android:name=".HomeActivity"
             android:exported="false" />
         <activity
             android:name=".Test"

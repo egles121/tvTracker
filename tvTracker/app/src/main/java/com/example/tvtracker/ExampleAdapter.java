@@ -26,6 +26,7 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
         }
     }
 
+
     public ExampleAdapter(ArrayList<ExampleItem> exampleList) {
         mExampleList = exampleList;
     }
