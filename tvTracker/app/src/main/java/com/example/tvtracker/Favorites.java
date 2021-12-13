@@ -1,6 +1,8 @@
 package com.example.tvtracker;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -8,9 +10,13 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CheckedTextView;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,10 +42,13 @@ import java.util.Calendar;
 
 public class Favorites extends AppCompatActivity {
     private TextView greeting;
-    private TextView nick;
     private Button logout;
     private ImageButton notifications;
     private Button main;
+    private RecyclerView mRecyclerView;
+    private ExampleAdapter mAdapter;// bridge between our data and recycler view (cant laod all items at once in recyclerview, adapter puts as many as we need
+    private RecyclerView.LayoutManager mLayoutManager; // assigns single items in our list
+    private ArrayList<ExampleItem> list = new ArrayList<>();
 
 
     @Override
@@ -48,7 +57,7 @@ public class Favorites extends AppCompatActivity {
         setContentView(R.layout.activity_favorites);
         userGreeting();
 
-        logout = (Button) findViewById(R.id. button_logoutFavorites);
+        logout = (Button) findViewById(R.id.button_logoutFavorites);
         logout.setOnClickListener(v -> logoutFunction(this));
 
         notifications = (ImageButton) findViewById(R.id.button_notificationsFav);
@@ -57,21 +66,17 @@ public class Favorites extends AppCompatActivity {
         main = (Button) findViewById(R.id.button_mainFav);
         main.setOnClickListener(v -> mainScreen());
 
-        // TextView tx1 = findViewById(R.id. list_tvshow1);
-        TextView tx2 = findViewById(R.id. list_tvshow2);
-        TextView tx3 = findViewById(R.id. list_tvshow3);
-        ListView list = (ListView) findViewById(R.id. favorites_list) ;
+        mRecyclerView = findViewById(R.id.favorite_recycler);
 
-        nick = (TextView) findViewById(R.id.greeting2);
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(Favorites.this);
-        int userId = sharedPref.getInt("userId", 646);
+        int userId = sharedPref.getInt("userId", 0);
 
         //Return a TV show name
         RestRequests restRequests = new RestRequests(Favorites.this);
         //get the favorite tv shows array from the database
         ArrayList<Integer> favoriteTvShows = User_dataQuery.favoriteShows(userId);
-        ArrayList<String> favorites = new ArrayList<>();
 
+        ImageView favoriteStar = new ImageView(this);
 
         for (int i = 0; i < favoriteTvShows.size(); i++) {
             restRequests.getShowName(favoriteTvShows.get(i), new RestRequests.VolleyResponseListener() {
@@ -79,29 +84,74 @@ public class Favorites extends AppCompatActivity {
                 public void onError(String message) {
                     Toast.makeText(Favorites.this, "Error at Favorites request", Toast.LENGTH_LONG).show();
                 }
+
                 @Override
-                public void onResponse (String tvShowName) {
-                    favorites.add(tvShowName);
-                    ArrayAdapter arrayAdapter = new ArrayAdapter(Favorites.this, android.R.layout.simple_list_item_multiple_choice, favorites);
-                    list.setAdapter(arrayAdapter);
+                public void onResponse(String tvShowName) {
+                    list.add(new ExampleItem(tvShowName, "hello", favoriteStar));
+                    mRecyclerView.setHasFixedSize(true); // if we know
+                    mLayoutManager = new LinearLayoutManager(Favorites.this);
+                    mAdapter = new ExampleAdapter(list);
+                    mRecyclerView.setLayoutManager(mLayoutManager);
+                    mRecyclerView.setAdapter(mAdapter);
+
+                    mAdapter.setOnItemClickListener(new ExampleAdapter.OnItemClickListener() {
+                        @Override
+                        public void onStarClick(int position) {
+                            //get the string value of TV show name from each list item we unselect
+                            //String unselected = (String) (list.getItemAtPosition(position));
+                            ExampleItem currentItem = list.get(position);
+                            String unselected = currentItem.getText1();
+
+                            //make the request to retrieve the TV show ID for the name we retrieved from the list item we checked
+                            restRequests.getShowId(unselected, new RestRequests.IDResponseListener() {
+                                @Override
+                                public void onError(String message) {
+                                    Toast.makeText(Favorites.this, "Error in HomeActivity getShowId request", Toast.LENGTH_LONG).show();
+                                }
+
+                                @Override
+                                public void onResponse(int id) {
+                                    //delete the unchecked tv show from the user_data table
+                                    User_dataQuery.delFavoriteShow(userId, id);
+                                }
+                            });
+
+                            deleteFavorite(position);
+                        }
+
+                        public void onItemClick(int position) {
+                            ExampleItem currentItem = list.get(position);
+                            String tvShowName = currentItem.getText1();
+                            Toast.makeText(Favorites.this, tvShowName, Toast.LENGTH_LONG).show();
+                            //make the request to retrieve the TV show ID for the name we retrieved from the list item we checked
+                            restRequests.getShowId(tvShowName, new RestRequests.IDResponseListener() {
+                                @Override
+                                public void onError(String message) {
+                                    Toast.makeText(Favorites.this, "Error in HomeActivity getShowId request", Toast.LENGTH_LONG).show();
+                                }
+
+                                @Override
+                                public void onResponse(int id) {
+                                    //go to TV show page
+                                    Toast.makeText(Favorites.this, "The ID is " + String.valueOf(id), Toast.LENGTH_LONG).show();
+
+                                    SharedPreferences.Editor editor = sharedPref.edit();
+                                    editor.putInt("tvShowId", id);
+                                    editor.apply();
+
+                                    Intent intent = new Intent(Favorites.this, TvShowDetails.class);
+                                    startActivity(intent);
+                                }
+                            });
+                        }
+                    });
                 }
             });
-
         }
-        Toast.makeText(Favorites.this, favorites.toString(), Toast.LENGTH_SHORT).show();
-
-
-
-        //tx3.setText(RestRequests.getShowName(25, Favorites.this));
-        //Toast.makeText(Favorites.this, RestRequests.getShowName(25, Favorites.this), Toast.LENGTH_LONG).show();
-        //String title = getApplicationContext().toString();
-        //Toast.makeText(getApplicationContext(), title, Toast.LENGTH_LONG).show();
-
     }
 
-
     //change greeting based on hour of day
-    public void userGreeting(){
+    public void userGreeting() {
         greeting = (TextView) findViewById(R.id.greeting);
         Calendar c = Calendar.getInstance();
         int currentTime = c.get(Calendar.HOUR_OF_DAY);
@@ -119,7 +169,7 @@ public class Favorites extends AppCompatActivity {
         }
     }
 
-    public void logoutFunction (Activity activity) {
+    public void logoutFunction(Activity activity) {
         Intent intent = new Intent(activity, MainActivity.class);
         startActivity(intent);
     }
@@ -127,7 +177,7 @@ public class Favorites extends AppCompatActivity {
     public void userNotifications() {
         Intent intent = new Intent(this, Notifications.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-        overridePendingTransition(0,0);
+        overridePendingTransition(0, 0);
         startActivity(intent);
     }
 
@@ -136,4 +186,8 @@ public class Favorites extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void deleteFavorite(int position) {
+        list.remove(position);
+        mAdapter.notifyItemRemoved(position);
+    }
 }

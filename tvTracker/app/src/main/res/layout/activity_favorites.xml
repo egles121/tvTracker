@@ -131,20 +131,18 @@
         android:id="@+id/button_mainFav"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
         android:text="Main"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/button_logoutFavorites"
-        app:layout_constraintHorizontal_bias="0.807"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/favorites_list"
-        app:layout_constraintVertical_bias="0.529" />
+        app:layout_constraintHorizontal_bias="0.796"
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <ListView
-        android:id="@+id/favorites_list"
-        android:layout_width="350dp"
-        android:layout_height="466dp"
-        android:layout_marginTop="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/button_logoutFavorites"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/favorite_recycler"
+        android:layout_width="341dp"
+        android:layout_height="411dp"
+        app:layout_constraintBottom_toTopOf="@+id/button_mainFav"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/greeting3" />

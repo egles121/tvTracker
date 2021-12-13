@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/cardView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="4dp"
@@ -13,7 +12,7 @@
         android:layout_marginBottom="4dp">
 
         <TextView
-            android:id="@+id/textview1"
+            android:id="@+id/TV_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
@@ -25,27 +24,15 @@
             android:textSize="20sp"
             android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/textview2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/textview1"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:paddingLeft="13dp"
-            android:text="line2"
-            android:textColor="@color/black"
-            android:textSize="15sp" />
-
         <ImageView
-            android:id="@+id/recycler_star"
+            android:id="@+id/recycler_box"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:src="@drawable/ic_baseline_star_24" />
-    </RelativeLayout>
+            android:src="@drawable/ic_baseline_check_box_outline_blank_24" />
 
+
+    </RelativeLayout>
 
 </androidx.cardview.widget.CardView>

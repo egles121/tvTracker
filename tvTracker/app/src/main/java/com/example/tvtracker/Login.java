@@ -38,8 +38,7 @@ public class Login extends MainActivity {
         return usernameString;
     }
 
-    public void setUsername (String usernameString) {
-        this.usernameString=usernameString;
+    public void setUsername (String usernameString) {this.usernameString=usernameString;
     }
 
     public String getPassword() {
@@ -71,25 +70,8 @@ public class Login extends MainActivity {
             editor.putInt("userId", userId);
             editor.apply();
 
-
-
             Intent intent = new Intent(this, Favorites.class);
             startActivity(intent);
         }
-
-
-        /*if (usernameString.equals("1") && passwordString.equals("1")){
-            Toast.makeText(Login.this, "Correct login details", Toast.LENGTH_SHORT).show();
-            String title = getApplicationContext().toString();
-            Toast.makeText(getApplicationContext(), title, Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(this, Favorites.class);
-                startActivity(intent);
-        }
-        else if (usernameString.equals("") || passwordString.equals("")){
-            Toast.makeText(Login.this, "Enter username & password", Toast.LENGTH_SHORT).show();
-        }
-        else {
-            Toast.makeText(Login.this, "Incorrect login details", Toast.LENGTH_SHORT).show();
-        }*/
     }
 }

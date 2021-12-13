@@ -30,8 +30,7 @@ private RecyclerView.LayoutManager mLayoutManager; // assigns single items in ou
         favorites = (Button) findViewById(R.id.button_home_fav);
         favorites.setOnClickListener(v -> favoritesScreen());
 
-        mScrollView = (ScrollView) findViewById(R.id.scrollView2);
-        mRecyclerView = findViewById(R.id.recyclerView);
+        mRecyclerView = findViewById(R.id.favorite_recycler);
 
         Button btn = new Button(this);
         //ArrayList<ExampleItem> exampleList = new ArrayList<>();
