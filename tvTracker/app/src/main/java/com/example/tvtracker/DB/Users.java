@@ -41,7 +41,7 @@ public class Users extends SqlQuery {
         try {
             if (connection != null) {
                 PreparedStatement preparedStatement = connection.prepareStatement(query);
-                preparedStatement.setString(1,username);
+                preparedStatement.setString(1, username);
                 ResultSet resultSet = preparedStatement.executeQuery();
 
                 if (resultSet == null) {
@@ -49,21 +49,22 @@ public class Users extends SqlQuery {
                 } else {
                     return false;
                 }
+
             } else {
                 return true;
             }
 
-        } catch (SQLException e) {
-            Log.e("SQL Error ", e.getMessage());
-            try {
-                connection.close();
-            } catch (SQLException er) {
-                Log.e("SQL Error ", er.getMessage());
-            }
-        }
+        } catch(SQLException e){
+                    Log.e("SQL Error ", e.getMessage());
+                    try {
+                        connection.close();
+                    } catch (SQLException er) {
+                        Log.e("SQL Error ", er.getMessage());
+                    }
+                }
 
-    return true;
+
+            return true;
+        }
     }
 
-
-}
