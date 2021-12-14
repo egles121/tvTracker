@@ -10,6 +10,8 @@ import android.widget.Toast;
 
 import com.example.tvtracker.DB.Users;
 
+import java.util.regex.Pattern;
+
 public class SignUp extends AppCompatActivity {
     private Button signup;
 
@@ -33,15 +35,18 @@ public class SignUp extends AppCompatActivity {
 
     public void userSignUp() {
             try {
+
                 username = ET_username.getText().toString();
                 password = ET_password.getText().toString();
                 email = ET_email.getText().toString();
 
-                if (Users.userExists(username) == false) {
+                if (Users.userExists(username) == false && emailIsValid(email) == true) {
                     Users.insertDetails(username, password, email);
                     Intent intent = new Intent (this, Login.class);
                     startActivity(intent);
-                } else {
+                } else if (emailIsValid(email) == false) {
+                    Toast.makeText(SignUp.this, "Invalid email address format", Toast.LENGTH_SHORT).show();
+                }  else {
                     Toast.makeText(SignUp.this, "This username already exists", Toast.LENGTH_SHORT).show();
                 }
 
@@ -50,5 +55,17 @@ public class SignUp extends AppCompatActivity {
             }
     }
 
+
+    public static boolean emailIsValid(String email) {
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."+
+                "[a-zA-Z0-9_+&*-]+)*@" +
+                "(?:[a-zA-Z0-9-]+\\.)+[a-z" +
+                "A-Z]{2,7}$";
+
+        Pattern pat = Pattern.compile(emailRegex);
+        if (email == null)
+            return false;
+        return pat.matcher(email).matches();
+    }
 
 }

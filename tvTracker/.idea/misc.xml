@@ -30,6 +30,13 @@
         <entry key="..\:/Users/egles/tvTracker/tvTracker/app/src/main/res/layout/login_screen.xml" value="0.264" />
         <entry key="..\:/Users/egles/tvTracker/tvTracker/app/src/main/res/layout/test.xml" value="0.4" />
         <entry key="..\:/Users/egles/tvTracker/tvTracker/app/src/main/res/layout/test2.xml" value="0.2463768115942029" />
+        <entry key="app/src/main/res/layout/activity_favorites.xml" value="0.10052083333333334" />
+        <entry key="app/src/main/res/layout/activity_home.xml" value="0.10052083333333334" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_main_screen.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_notifications.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_test.xml" value="0.10052083333333334" />
       </map>
     </option>
   </component>
