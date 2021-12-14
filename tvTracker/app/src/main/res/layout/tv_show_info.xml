@@ -12,11 +12,26 @@
         android:layout_marginBottom="4dp">
 
         <TextView
+            android:id="@+id/TV_textview2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/TV_textview"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="1dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginEnd="10dp"
+            android:paddingLeft="1dp"
+            android:text="line2"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
             android:id="@+id/TV_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="1dp"
             android:layout_marginEnd="10dp"
             android:paddingLeft="1dp"
             android:text="line1"
@@ -24,13 +39,12 @@
             android:textSize="20sp"
             android:textStyle="bold" />
 
-        <ImageView
-            android:id="@+id/recycler_box"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_alignParentTop="true"
+        <CheckBox
+            android:id="@+id/tvShowDetails_check"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:src="@drawable/ic_baseline_check_box_outline_blank_24" />
+            android:layout_marginEnd="0dp" />
 
 
     </RelativeLayout>

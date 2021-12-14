@@ -27,6 +27,8 @@ public class RestRequests {
     public static final String QUERY_FOR_TVSHOW_ID = "https://api.tvmaze.com/singlesearch/shows?q=";
 
     String tvShowName;
+    String tvShowSummary;
+    String tvShowGenres;
     Context context;
     int id;
 
@@ -39,6 +41,11 @@ public class RestRequests {
         void onResponse(String tvShowName);
     }
 
+    public interface TvShowInfoResponseListener {
+        void onError(String message);
+        void onResponse(String tvShowName, String tvShowDescription, String tvShowGenres);
+    }
+
     public interface TvShowListResponse {
         void onError(String message);
         void onResponse(ArrayList<String> result);
@@ -47,6 +54,11 @@ public class RestRequests {
     public interface IDResponseListener {
         void onError(String message);
         void onResponse(int id);
+    }
+
+    public interface EpisodeListResponse {
+        void onError(String message);
+        void onResponse(ArrayList<TvEpisode> result);
     }
 
     public void getShowName(int id, final VolleyResponseListener volleyResponseListener) {
@@ -59,7 +71,6 @@ public class RestRequests {
                      tvShowName = "";
                      try {
                          tvShowName = response.getString("name");
-
                      } catch (JSONException e) {
                          e.printStackTrace();
                      }
@@ -77,6 +88,81 @@ public class RestRequests {
              RequestSingleton.getInstance(context).addToRequestQueue(request);
 
          }
+
+    public void getShowInfo(int id, final TvShowInfoResponseListener tvShowInfoResponseListener) {
+
+        String url = QUERY_FOR_TVSHOW_NAME + id;
+
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                tvShowName = "";
+                tvShowSummary = "";
+                tvShowGenres = "";
+
+                try {
+                    tvShowName = response.getString("name");
+                    tvShowSummary = response.getString("summary");
+                    JSONArray genres = response.getJSONArray("genres");
+
+                    for (int i = 0; i < genres.length(); i++) {
+                        tvShowGenres += genres.getString(i);
+                        if (i != genres.length() -1) tvShowGenres += ", ";
+                        Toast.makeText(context,"Genre is: " + tvShowGenres, Toast.LENGTH_LONG).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                tvShowInfoResponseListener.onResponse(tvShowName, tvShowSummary, tvShowGenres);
+            }
+
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, "Error", Toast.LENGTH_LONG).show();
+                tvShowInfoResponseListener.onError("Error 54: " + error);
+            }
+        });
+
+        RequestSingleton.getInstance(context).addToRequestQueue(request);
+
+    }
+
+    public void getEpisodeList(int id, final EpisodeListResponse episodeListResponse){
+
+        ArrayList<TvEpisode> tvEpisodes = new ArrayList<TvEpisode>();
+
+        String url = QUERY_FOR_EPISODES + id + "/episodes";
+
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                try {
+                    for (int i = 0; i < response.length(); i++) {
+                        TvEpisode firstEpisode = new TvEpisode();
+
+                        JSONObject firstEpisodeAPI = (JSONObject) response.get(i); //we get the first Tv Episode object from the array
+                        firstEpisode.setName(firstEpisodeAPI.getString("name"));
+                        firstEpisode.setSeasonNr(firstEpisodeAPI.getInt("season"));
+                        firstEpisode.setEpisodeNr(firstEpisodeAPI.getInt("number"));
+
+                        tvEpisodes.add(firstEpisode); //add tvShow to the list
+                        //Toast.makeText(context, firstTvShow.toString(), Toast.LENGTH_LONG).show();
+                    }
+                } catch (JSONException e){
+                    e.printStackTrace();
+                }
+                episodeListResponse.onResponse(tvEpisodes);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, "Error at RestRequest getEpisodeList", Toast.LENGTH_LONG).show();
+            }
+        });
+        RequestSingleton.getInstance(context).addToRequestQueue(request);
+    }
 
     public void getTvShowList(String search, TvShowListResponse tvShowListResponse){
 
@@ -134,12 +220,8 @@ public class RestRequests {
         RequestSingleton.getInstance(context).addToRequestQueue(request);
     }
 
-
     public void getShowId(String name, final IDResponseListener idResponseListener) {
-        Toast.makeText(context, "Name: " + name, Toast.LENGTH_LONG).show();
-
         String url = QUERY_FOR_TVSHOW_ID + name;
-        Toast.makeText(context, url, Toast.LENGTH_LONG).show();
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
