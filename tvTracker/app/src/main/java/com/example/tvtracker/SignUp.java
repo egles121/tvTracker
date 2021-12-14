@@ -40,14 +40,18 @@ public class SignUp extends AppCompatActivity {
                 password = ET_password.getText().toString();
                 email = ET_email.getText().toString();
 
-                if (Users.userExists(username) == false && emailIsValid(email) == true) {
+                if (Users.userExists(username) == false && emailIsValid(email) == true && isEmpty(username, password, email) == false) {
                     Users.insertDetails(username, password, email);
                     Intent intent = new Intent (this, Login.class);
                     startActivity(intent);
                 } else if (emailIsValid(email) == false) {
                     Toast.makeText(SignUp.this, "Invalid email address format", Toast.LENGTH_SHORT).show();
-                }  else {
+                }  else if (Users.userExists(username) == true) {
                     Toast.makeText(SignUp.this, "This username already exists", Toast.LENGTH_SHORT).show();
+                } else if (isEmpty(username, password, email) == true) {
+                    Toast.makeText(SignUp.this, "Required field is missing", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(SignUp.this, "Sign up error", Toast.LENGTH_SHORT).show();
                 }
 
             } catch (Exception e) {
@@ -66,6 +70,14 @@ public class SignUp extends AppCompatActivity {
         if (email == null)
             return false;
         return pat.matcher(email).matches();
+    }
+
+    public static boolean isEmpty (String username, String password, String email) {
+        if (username.length() > 0 && password.length() > 0 && email.length() >0) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
 }
