@@ -26,11 +26,13 @@ public class TvShowAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleVi
 
     public static class ExampleViewHolder extends RecyclerView.ViewHolder{
         public TextView mTextView1;
+        public TextView mTextView2;
         public ImageView checkBox;
         public ExampleViewHolder(@NonNull View itemView, final ExampleAdapter.OnItemClickListener listener) {
             super(itemView);
             mTextView1 = itemView.findViewById(R.id.TV_textview);
-            checkBox = itemView.findViewById(R.id.recycler_box);
+            mTextView2 = itemView.findViewById(R.id.TV_textview2);
+            //checkBox = itemView.findViewById(R.id.recycler_box);
 
             /*favoriteStar.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -54,7 +56,7 @@ public class TvShowAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleVi
     @NonNull
     @Override
     public ExampleAdapter.ExampleViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.example, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.tv_show_info, parent, false);
         ExampleAdapter.ExampleViewHolder evh = new ExampleAdapter.ExampleViewHolder(v, mListener);
         return evh;
     }
@@ -65,8 +67,8 @@ public class TvShowAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleVi
         TvShowItem currentItem = mTvShowList.get(position); //we get the item at the position we pass
 
         holder.mTextView1.setText(currentItem.getText1()); //example viewholder
-        holder.favoriteStar = currentItem.getBox();
-
+        holder.mTextView2.setText(currentItem.getText2()); //example viewholder
+        //holder.favoriteStar = currentItem.getBox();
     }
 
     @Override

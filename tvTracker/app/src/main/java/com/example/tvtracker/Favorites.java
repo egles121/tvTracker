@@ -133,8 +133,6 @@ public class Favorites extends AppCompatActivity {
                                 @Override
                                 public void onResponse(int id) {
                                     //go to TV show page
-                                    Toast.makeText(Favorites.this, "The ID is " + String.valueOf(id), Toast.LENGTH_LONG).show();
-
                                     SharedPreferences.Editor editor = sharedPref.edit();
                                     editor.putInt("tvShowId", id);
                                     editor.apply();

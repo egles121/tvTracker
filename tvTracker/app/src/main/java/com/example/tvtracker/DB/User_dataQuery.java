@@ -84,4 +84,28 @@ public class User_dataQuery extends SqlQuery{
         }
         return null;
     }
+
+    public static boolean showIsFavorite(int userID, int  showID) {
+        String query = "SELECT tvShow_id FROM user_data WHERE user_id = ? AND tvShow_id = ?";
+
+        Connection connection = SqlConnection.connect();
+        try {
+            if (connection != null) {
+                PreparedStatement statement = connection.prepareStatement(query);
+                statement.setInt(1, userID);
+                statement.setInt(2, showID);
+                ResultSet resultSet = statement.executeQuery();
+                if (resultSet == null) return false;
+                return true;
+            }
+        } catch (SQLException e) {
+            Log.e("SQL Error ", e.getMessage());
+            try {
+                connection.close();
+            } catch (SQLException er) {
+                Log.e("SQL Error ", er.getMessage());
+            }
+        }
+        return false;
+    }
 }
