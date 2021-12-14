@@ -12,6 +12,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.tvtracker.Favorites;
 import com.example.tvtracker.Show;
+import com.example.tvtracker.TvEpisode;
 import com.example.tvtracker.TvShow;
 
 import org.json.JSONArray;
@@ -25,6 +26,7 @@ public class RestRequests {
     public static final String QUERY_FOR_TVSHOW_NAME = "https://api.tvmaze.com/shows/";
     public static final String QUERY_FOR_TVSHOW_LIST = "https://api.tvmaze.com/search/shows?q=";
     public static final String QUERY_FOR_TVSHOW_ID = "https://api.tvmaze.com/singlesearch/shows?q=";
+    public static final String QUERY_FOR_EPISODES = "https://api.tvmaze.com/shows/";
 
     String tvShowName;
     String tvShowSummary;

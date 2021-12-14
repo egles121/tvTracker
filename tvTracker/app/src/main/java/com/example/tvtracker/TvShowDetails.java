@@ -22,7 +22,7 @@ import java.util.ArrayList;
 public class TvShowDetails extends AppCompatActivity {
     private ArrayList<TvShowItem> list = new ArrayList<>();
     private RecyclerView mRecyclerView;
-    private TvShowAdapter mAdapter;// bridge between our data and recycler view (cant load all items at once in recyclerview, adapter puts as many as we need
+    private TvAdapter mAdapter;// bridge between our data and recycler view (cant load all items at once in recyclerview, adapter puts as many as we need
     private RecyclerView.LayoutManager mLayoutManager; // assigns single items in our list
     private ImageView favStar;
 
@@ -48,21 +48,38 @@ public class TvShowDetails extends AppCompatActivity {
 
         RestRequests restRequests = new RestRequests(TvShowDetails.this);
 
-        restRequests.getShowName(tvShowId, new RestRequests.VolleyResponseListener() {
+        restRequests.getEpisodeList(tvShowId, new RestRequests.EpisodeListResponse() {
             @Override
             public void onError(String message) {
                 Toast.makeText(TvShowDetails.this, "Error at TvShowDetails request", Toast.LENGTH_LONG).show();
             }
 
             @Override
-            public void onResponse(String tvShowName) {
-               tvShowTitle.setText(tvShowName);
-                /*list.add(new TvShowItem(tvShowName, checkBox));
-                mRecyclerView.setHasFixedSize(true); // if we know
-                mLayoutManager = new LinearLayoutManager(TvShowDetails.this);
-                mAdapter = new TvShowAdapter(list);
-                mRecyclerView.setLayoutManager(mLayoutManager);
-                mRecyclerView.setAdapter(mAdapter);*/
+            public void onResponse(ArrayList<TvEpisode> result) {
+                for (int i = 0; i < result.size(); i++){
+                    TvEpisode tvEpisode = result.get(i);
+                    String episodeNr = "S";
+                    episodeNr += String.valueOf(tvEpisode.seasonNr) + "E" + String.valueOf(tvEpisode.episodeNr);
+
+                    tvEpisodes.add(new TvShowItem(tvEpisode.name, episodeNr, checkBox));
+                    mRecyclerView.setHasFixedSize(true); // if we know
+                    mLayoutManager = new LinearLayoutManager(TvShowDetails.this);
+                    mAdapter = new TvAdapter(tvEpisodes);
+                    mRecyclerView.setLayoutManager(mLayoutManager);
+                    mRecyclerView.setAdapter(mAdapter);
+
+                    mAdapter.setOnItemClickListenerTv(new TvAdapter.OnItemClickListener() {
+                        @Override
+                        public void onBoxClick(int position) {
+                            //get the string value of TV show name from each list item we unselect
+                            //String unselected = (String) (list.getItemAtPosition(position));
+                            TvShowItem currentItem = tvEpisodes.get(position);
+                            //String unselected = currentItem.getText1;
+                            CheckBox box = currentItem.getBox();
+                            Toast.makeText(TvShowDetails.this, "you clicked the box", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
             }
         });
 

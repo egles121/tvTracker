@@ -1,14 +1,17 @@
 package com.example.tvtracker;
 
+import android.widget.CheckBox;
 import android.widget.ImageView;
 
 public class TvShowItem {
     private String episodeInfo;
-    public ImageView check;
+    private String episodeNo;
+    public CheckBox check;
 
 
-    public TvShowItem(String episodeInfo, ImageView check){
-        this.episodeInfo =episodeInfo;
+    public TvShowItem(String episodeInfo, String episodeNo, CheckBox check){
+        this.episodeInfo = episodeInfo;
+        this.episodeNo = episodeNo;
         this.check = check;
     }
 
@@ -16,8 +19,11 @@ public class TvShowItem {
         return episodeInfo;
     }
 
+    public String getText2(){
+        return episodeNo;
+    }
 
-    public ImageView getBox() {
+    public CheckBox getBox() {
         return check;
     }
 }
