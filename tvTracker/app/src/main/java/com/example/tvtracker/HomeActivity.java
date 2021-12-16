@@ -26,8 +26,11 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        Bundle bundle = getIntent().getExtras();
+        int userId = bundle.getInt("userId");
+
         Button favorites = (Button) findViewById(R.id.button_home_fav);
-        favorites.setOnClickListener(v -> favoritesScreen());
+        favorites.setOnClickListener(v -> favoritesScreen(userId));
 
         ListView list = (ListView) findViewById(R.id. home_listView) ;
 
@@ -59,8 +62,8 @@ public class HomeActivity extends AppCompatActivity {
                     String selected = (String) (list.getItemAtPosition(position));
 
                     //access the userID of the user that is using the app currently
-                    SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(HomeActivity.this);
-                    int userId = sharedPref.getInt("userId", 0);
+                    SharedPreferences sharedPref = getSharedPreferences("userPref", HomeActivity.this.MODE_PRIVATE);
+                    //int userId = sharedPref.getInt("userId", 0);
 
                     //make the request to retrieve the TV show ID for the name we retrieved from the list item we checked
                     restRequests.getShowId(selected, new RestRequests.IDResponseListener() {
@@ -81,7 +84,7 @@ public class HomeActivity extends AppCompatActivity {
 
                     //access the userID of the user that is using the app currently
                     SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(HomeActivity.this);
-                    int userId = sharedPref.getInt("userId", 0);
+                    //int userId = sharedPref.getInt("userId", 0);
 
                     //make the request to retrieve the TV show ID for the name we retrieved from the list item we checked
                     restRequests.getShowId(unselected, new RestRequests.IDResponseListener() {
@@ -103,8 +106,9 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
-    public void favoritesScreen() {
+    public void favoritesScreen(int userId) {
         Intent intent = new Intent (this, Favorites.class);
+        intent.putExtra("userId", userId);
         startActivity(intent);
     }
 

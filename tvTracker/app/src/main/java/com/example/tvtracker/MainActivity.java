@@ -3,7 +3,9 @@ package com.example.tvtracker;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 
@@ -21,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
         login.setOnClickListener(v -> openLoginActivity());
         signup.setOnClickListener(v -> openSignUpActivity());
+
     }
 
     public void openLoginActivity(){

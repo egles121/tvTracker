@@ -8,34 +8,17 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CheckedTextView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
-import com.example.tvtracker.DB.TvShowsQuery;
+
 import com.example.tvtracker.DB.User_dataQuery;
-import com.example.tvtracker.REST.RequestSingleton;
 import com.example.tvtracker.REST.RestRequests;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.w3c.dom.Text;
+
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -55,21 +38,24 @@ public class Favorites extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favorites);
+
+        Bundle bundle = getIntent().getExtras();
+        int userId = bundle.getInt("userId");
         userGreeting();
 
         logout = (Button) findViewById(R.id.button_logoutFavorites);
         logout.setOnClickListener(v -> logoutFunction(this));
 
         notifications = (ImageButton) findViewById(R.id.button_notificationsFav);
-        notifications.setOnClickListener(v -> userNotifications());
+        notifications.setOnClickListener(v -> userNotifications(userId));
 
         main = (Button) findViewById(R.id.button_mainFav);
-        main.setOnClickListener(v -> mainScreen());
+        main.setOnClickListener(v -> mainScreen(userId));
 
         mRecyclerView = findViewById(R.id.favorite_recycler);
 
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(Favorites.this);
-        int userId = sharedPref.getInt("userId", 0);
+        SharedPreferences sharedPref = getSharedPreferences("userPref", Favorites.this.MODE_PRIVATE);
+        //int userId = sharedPref.getInt("userId", 0);
 
         //Return a TV show name
         RestRequests restRequests = new RestRequests(Favorites.this);
@@ -122,7 +108,6 @@ public class Favorites extends AppCompatActivity {
                         public void onItemClick(int position) {
                             ExampleItem currentItem = list.get(position);
                             String tvShowName = currentItem.getText1();
-                            Toast.makeText(Favorites.this, tvShowName, Toast.LENGTH_LONG).show();
                             //make the request to retrieve the TV show ID for the name we retrieved from the list item we checked
                             restRequests.getShowId(tvShowName, new RestRequests.IDResponseListener() {
                                 @Override
@@ -138,6 +123,7 @@ public class Favorites extends AppCompatActivity {
                                     editor.apply();
 
                                     Intent intent = new Intent(Favorites.this, TvShowDetails.class);
+                                    intent.putExtra("userId", userId);
                                     startActivity(intent);
                                 }
                             });
@@ -172,15 +158,17 @@ public class Favorites extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void userNotifications() {
+    public void userNotifications(int userId) {
         Intent intent = new Intent(this, Notifications.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         overridePendingTransition(0, 0);
+        intent.putExtra("userId", userId);
         startActivity(intent);
     }
 
-    public void mainScreen() {
+    public void mainScreen(int userId) {
         Intent intent = new Intent(this, HomeActivity.class);
+        intent.putExtra("userId", userId);
         startActivity(intent);
     }
 

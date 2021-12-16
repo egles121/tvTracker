@@ -108,4 +108,77 @@ public class User_dataQuery extends SqlQuery{
         }
         return false;
     }
+
+    public static void saveEpisode(int userId, int tvShowId, int episodeId) {
+        String query = "INSERT INTO user_data (user_id, tvShow_id, lastEp_id) VALUES (?, ?, ?);";
+
+        Connection connection = SqlConnection.connect();
+        try {
+            if (connection != null) {
+                PreparedStatement preparedStatement = connection.prepareStatement(query);
+                preparedStatement.setInt(1, userId);
+                preparedStatement.setInt(2, tvShowId);
+                preparedStatement.setInt(3, episodeId);
+                preparedStatement.executeUpdate();
+            }
+
+        } catch (SQLException e) {
+            Log.e("SQL Error ", e.getMessage());
+            try {
+                connection.close();
+            } catch (SQLException er) {
+                Log.e("SQL Error ", er.getMessage());
+            }
+        }
+    }
+
+    public static ArrayList<Integer> episodesWatched(int userID, int  showID) {
+        String query = "SELECT lastEp_id FROM user_data WHERE user_id = ? AND tvShow_id = ?";
+        ArrayList<Integer> resultArray = new ArrayList<>();
+
+        Connection connection = SqlConnection.connect();
+        try {
+            if (connection != null) {
+                PreparedStatement statement = connection.prepareStatement(query);
+                statement.setInt(1, userID);
+                statement.setInt(2, showID);
+                ResultSet resultSet = statement.executeQuery();
+                while (resultSet.next()) {
+                    resultArray.add(resultSet.getInt(1));
+                }
+            }
+        } catch (SQLException e) {
+            Log.e("SQL Error ", e.getMessage());
+            try {
+                connection.close();
+            } catch (SQLException er) {
+                Log.e("SQL Error ", er.getMessage());
+            }
+        }
+        return resultArray;
+    }
+
+    public static void delWatchedEpisode(int userId, int tvShowId, int episodeId) {
+        String query = "DELETE FROM user_data WHERE user_id = ? AND tvShow_id = ? and lastEp_id = ?;";
+
+        Connection connection = SqlConnection.connect();
+        try {
+            if (connection != null) {
+                PreparedStatement preparedStatement = connection.prepareStatement(query);
+                preparedStatement.setInt(1, userId);
+                preparedStatement.setInt(2, tvShowId);
+                preparedStatement.setInt(3, episodeId);
+                preparedStatement.executeUpdate();
+            }
+
+        } catch (SQLException e) {
+            Log.e("SQL Error ", e.getMessage());
+            try {
+                connection.close();
+            } catch (SQLException er) {
+                Log.e("SQL Error ", er.getMessage());
+            }
+        }
+    }
+
 }
