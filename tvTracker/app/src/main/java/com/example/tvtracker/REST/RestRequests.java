@@ -147,6 +147,7 @@ public class RestRequests {
                         firstEpisode.setName(firstEpisodeAPI.getString("name"));
                         firstEpisode.setSeasonNr(firstEpisodeAPI.getInt("season"));
                         firstEpisode.setEpisodeNr(firstEpisodeAPI.getInt("number"));
+                        firstEpisode.setEpisodeId(firstEpisodeAPI.getInt("id"));
 
                         tvEpisodes.add(firstEpisode); //add tvShow to the list
                     }

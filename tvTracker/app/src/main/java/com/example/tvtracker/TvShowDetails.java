@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,9 +40,11 @@ public class TvShowDetails extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tv_show_details);
-
+        Bundle bundle = getIntent().getExtras();
+        int userId = bundle.getInt("userId");
         mRecyclerView = findViewById(R.id.recycler_tvShows);
         CheckBox checkBox = new CheckBox(this);
+        //ListView list = (ListView) findViewById(R.id. listView2) ;
 
         TextView tvShowTitle = (TextView) findViewById(R.id.tvShowTitle);
         TextView tvShowSummary = (TextView) findViewById(R.id.tvShowsDetails_Desc);

@@ -72,6 +72,7 @@ public class Login extends MainActivity {
             editor.apply();
 
             Intent intent = new Intent(this, Favorites.class);
+            intent.putExtra("userId", userId);
             startActivity(intent);
         }
     }

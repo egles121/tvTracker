@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,6 +20,8 @@ import java.util.Map;
 public class TvAdapter extends RecyclerView.Adapter<TvAdapter.TvAdapterViewHolder> {
     private ArrayList<TvShowItem> nTvShowList;
     private TvAdapter.OnItemClickListener nListener;
+    private TvAdapter.OnCheckedChangeListener checkListener;
+
 
     public interface OnItemClickListener {
         void onBoxClick(int position);
@@ -31,16 +34,50 @@ public class TvAdapter extends RecyclerView.Adapter<TvAdapter.TvAdapterViewHolde
         nListener = listener;
     }
 
+    public void setOnItemCheckedChangeListener(TvAdapter.OnCheckedChangeListener listener){
+        checkListener = listener;
+    }
+
         public static class TvAdapterViewHolder extends RecyclerView.ViewHolder{
             public TextView nTextView1;
             public TextView nTextView2;
             public CheckBox checkBox;
 
-            public TvAdapterViewHolder(@NonNull View itemView, final TvAdapter.OnItemClickListener listener) {
+            /*public TvAdapterViewHolder(@NonNull View itemView, final TvAdapter.OnItemClickListener listener) {*/
+            public TvAdapterViewHolder(@NonNull View itemView, final TvAdapter.OnCheckedChangeListener listener) {
                 super(itemView);
                 nTextView1 = itemView.findViewById(R.id.TV_textview);
                 nTextView2 = itemView.findViewById(R.id.TV_textview2);
                 checkBox = itemView.findViewById(R.id.tvShowDetails_check);
+
+                checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        //set your object's last status
+                        checkBox.setSelected(isChecked);
+
+                        if (listener != null) {
+                            int position = getAdapterPosition();
+
+                            if (position != RecyclerView.NO_POSITION) {
+                                listener.onCheckedChanged(position);
+                                //onClickListener.onBoxClick(checkBox, position);
+                                checkBox.setChecked(!checkBox.isChecked());
+
+
+                            }
+                        }
+
+
+                    }
+                });
+
+                /*HashMap<Integer, Boolean> episodeListMap = FileIO.deserialize2(itemView.getContext());
+                for (Map.Entry<Integer, Boolean> entry : episodeListMap.entrySet()) {
+                    if(entry.getValue()) {
+                       checkBox.setChecked(true);
+                    }
+                }*/
 
                 /*checkBox.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -50,8 +87,9 @@ public class TvAdapter extends RecyclerView.Adapter<TvAdapter.TvAdapterViewHolde
 
                             if (position != RecyclerView.NO_POSITION) {
                                 listener.onBoxClick(position);
-
+                                    //onClickListener.onBoxClick(checkBox, position);
                                     checkBox.setChecked(!checkBox.isChecked());
+
 
                             }
                         }

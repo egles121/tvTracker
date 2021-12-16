@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="TextView"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toStartOf="@+id/TvShowFav"
         app:layout_constraintHorizontal_bias="0.048"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,7 +36,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.47"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
         app:layout_constraintVertical_bias="0.813">
 
         <LinearLayout
@@ -47,7 +47,9 @@
                 android:id="@+id/tvShowsDetails_Desc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="tvShowsDetails_Description" />
+                android:fontFamily="@font/roboto_medium"
+                android:text="tvShowsDetails_Description"
+                android:textColor="@color/white" />
 
             <Space
                 android:layout_width="match_parent"
