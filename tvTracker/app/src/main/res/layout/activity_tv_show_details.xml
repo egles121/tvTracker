@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TvShowDetails"
-    android:background="@drawable/gradient_background">
+    android:background="@drawable/gradient_background"
+    tools:context=".TvShowDetails">
 
     <TextView
         android:id="@+id/tvShowTitle"
@@ -41,7 +41,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/tvShowsDetails_Desc"
@@ -57,7 +57,9 @@
                 android:id="@+id/tvShowDetails_Genres"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="tvShowDetails_Genres" />
+                android:fontFamily="@font/roboto_medium"
+                android:text="tvShowDetails_Genres"
+                android:textColor="@color/white" />
 
             <Space
                 android:layout_width="match_parent"
@@ -65,9 +67,10 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
                 android:id="@+id/recycler_tvShows"
-                />
+                android:layout_height="489dp"
+                android:padding="4dp" />
+
         </LinearLayout>
     </ScrollView>
 

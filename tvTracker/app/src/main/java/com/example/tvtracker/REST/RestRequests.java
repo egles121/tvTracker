@@ -111,7 +111,6 @@ public class RestRequests {
                     for (int i = 0; i < genres.length(); i++) {
                         tvShowGenres += genres.getString(i);
                         if (i != genres.length() -1) tvShowGenres += ", ";
-                        Toast.makeText(context,"Genre is: " + tvShowGenres, Toast.LENGTH_LONG).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -150,7 +149,6 @@ public class RestRequests {
                         firstEpisode.setEpisodeNr(firstEpisodeAPI.getInt("number"));
 
                         tvEpisodes.add(firstEpisode); //add tvShow to the list
-                        //Toast.makeText(context, firstTvShow.toString(), Toast.LENGTH_LONG).show();
                     }
                 } catch (JSONException e){
                     e.printStackTrace();
@@ -175,7 +173,6 @@ public class RestRequests {
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>(){
             @Override
             public void onResponse(JSONArray response){
-                //Toast.makeText(context, response.toString(), Toast.LENGTH_LONG).show();
                 try {
 
                     for (int i = 0; i < response.length(); i++) {
@@ -196,7 +193,6 @@ public class RestRequests {
                         firstTvShow.setShow(show);
 
                         tvShow.add(firstTvShow); //add tvShow to the list
-                        //Toast.makeText(context, firstTvShow.toString(), Toast.LENGTH_LONG).show();
                     }
 
                     ArrayList<String> result  = new ArrayList<String>();
@@ -231,7 +227,6 @@ public class RestRequests {
 
                 try {
                     id = response.getInt("id");
-                    Toast.makeText(context, String.valueOf(id), Toast.LENGTH_LONG).show();
 
                 } catch (JSONException e) {
                     e.printStackTrace();

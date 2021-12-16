@@ -64,9 +64,10 @@ public class Login extends MainActivity {
         if (userId == 0) {
             Toast.makeText(Login.this, "Incorrect login details", Toast.LENGTH_SHORT).show();
         } else {
-
-            SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(Login.this);
+            SharedPreferences sharedPref = getSharedPreferences("userPref", Login.this.MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPref.edit();
+            editor.clear();
+            editor.apply();
             editor.putInt("userId", userId);
             editor.apply();
 

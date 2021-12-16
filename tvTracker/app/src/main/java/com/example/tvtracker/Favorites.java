@@ -68,8 +68,8 @@ public class Favorites extends AppCompatActivity {
 
         mRecyclerView = findViewById(R.id.favorite_recycler);
 
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(Favorites.this);
-        int userId = sharedPref.getInt("userId", 0);
+        SharedPreferences sharedPref = getSharedPreferences("userPref", Favorites.this.MODE_PRIVATE);
+        //int userId = sharedPref.getInt("userId", 0);
 
         //Return a TV show name
         RestRequests restRequests = new RestRequests(Favorites.this);
@@ -122,7 +122,6 @@ public class Favorites extends AppCompatActivity {
                         public void onItemClick(int position) {
                             ExampleItem currentItem = list.get(position);
                             String tvShowName = currentItem.getText1();
-                            Toast.makeText(Favorites.this, tvShowName, Toast.LENGTH_LONG).show();
                             //make the request to retrieve the TV show ID for the name we retrieved from the list item we checked
                             restRequests.getShowId(tvShowName, new RestRequests.IDResponseListener() {
                                 @Override

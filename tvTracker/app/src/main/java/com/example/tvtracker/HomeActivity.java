@@ -59,8 +59,8 @@ public class HomeActivity extends AppCompatActivity {
                     String selected = (String) (list.getItemAtPosition(position));
 
                     //access the userID of the user that is using the app currently
-                    SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(HomeActivity.this);
-                    int userId = sharedPref.getInt("userId", 0);
+                    SharedPreferences sharedPref = getSharedPreferences("userPref", HomeActivity.this.MODE_PRIVATE);
+                    //int userId = sharedPref.getInt("userId", 0);
 
                     //make the request to retrieve the TV show ID for the name we retrieved from the list item we checked
                     restRequests.getShowId(selected, new RestRequests.IDResponseListener() {

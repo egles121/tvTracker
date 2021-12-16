@@ -4,13 +4,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class TvAdapter extends RecyclerView.Adapter<TvAdapter.TvAdapterViewHolder> {
     private ArrayList<TvShowItem> nTvShowList;
@@ -18,6 +22,9 @@ public class TvAdapter extends RecyclerView.Adapter<TvAdapter.TvAdapterViewHolde
 
     public interface OnItemClickListener {
         void onBoxClick(int position);
+    }
+    public interface OnCheckedChangeListener {
+        void onCheckedChanged(int position);
     }
 
     public void setOnItemClickListenerTv(TvAdapter.OnItemClickListener listener){
@@ -35,7 +42,7 @@ public class TvAdapter extends RecyclerView.Adapter<TvAdapter.TvAdapterViewHolde
                 nTextView2 = itemView.findViewById(R.id.TV_textview2);
                 checkBox = itemView.findViewById(R.id.tvShowDetails_check);
 
-                checkBox.setOnClickListener(new View.OnClickListener() {
+                /*checkBox.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         if (listener != null) {
@@ -49,7 +56,7 @@ public class TvAdapter extends RecyclerView.Adapter<TvAdapter.TvAdapterViewHolde
                             }
                         }
                     }
-                });
+                });*/
             }
         }
 
@@ -61,7 +68,7 @@ public class TvAdapter extends RecyclerView.Adapter<TvAdapter.TvAdapterViewHolde
     @Override
     public TvAdapterViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.tv_show_info, parent, false);
-        TvAdapter.TvAdapterViewHolder tve = new TvAdapter.TvAdapterViewHolder(v, nListener);
+        TvAdapter.TvAdapterViewHolder tve = new TvAdapter.TvAdapterViewHolder(v, checkListener);
         return tve;
     }
 
@@ -71,7 +78,24 @@ public class TvAdapter extends RecyclerView.Adapter<TvAdapter.TvAdapterViewHolde
 
         holder.nTextView1.setText(currentItem.getText1()); //example viewholder
         holder.nTextView2.setText(currentItem.getText2()); //example viewholder
-        holder.checkBox = currentItem.getBox();
+        //holder.checkBox = currentItem.getBox();
+        //holder.checkBox.setChecked(currentItem.getBox().isChecked());
+//        currentItem.check.setChecked(true);
+
+
+        //in some cases, it will prevent unwanted situations
+        holder.checkBox.setOnCheckedChangeListener(null);
+
+        //if true, your checkbox will be selected, else unselected
+        holder.checkBox.setChecked(currentItem.isSelected());
+
+//        holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                //set your object's last status
+//                currentItem.setSelected(isChecked);
+//            }
+//        });
     }
 
     @Override
