@@ -36,6 +36,9 @@ public class HomeActivity extends AppCompatActivity {
 
         Button favorites = (Button) findViewById(R.id.button_home_fav);
         favorites.setOnClickListener(v -> favoritesScreen(userId, username));
+        EditText search = (EditText) findViewById(R.id.search);
+
+        ImageButton searchButton = (ImageButton) findViewById(R.id.button_search);
 
         ListView list = (ListView) findViewById(R.id. home_listView) ;
 
@@ -60,6 +63,8 @@ public class HomeActivity extends AppCompatActivity {
 
             }
         });
+
+
 
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -104,6 +109,9 @@ public class HomeActivity extends AppCompatActivity {
                 }
             }
         });
+            }
+        });
+
 
 
     }
