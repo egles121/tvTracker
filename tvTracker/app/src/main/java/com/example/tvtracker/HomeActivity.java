@@ -48,7 +48,6 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String searchValue = search.getText().toString();
-                Toast.makeText(HomeActivity.this, searchValue, Toast.LENGTH_LONG).show();
             restRequests.getTvShowList(searchValue, new RestRequests.TvShowListResponse() {
             @Override
             public void onError(String message) {

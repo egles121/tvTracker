@@ -1,41 +1,20 @@
 package com.example.tvtracker;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CheckedTextView;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
-import com.example.tvtracker.DB.TvShowsQuery;
 import com.example.tvtracker.DB.User_dataQuery;
-import com.example.tvtracker.REST.RequestSingleton;
 import com.example.tvtracker.REST.RestRequests;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -58,7 +37,6 @@ public class Favorites extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         String nickname = bundle.getString("usernameInput");
-        Toast.makeText(Favorites.this, nickname, Toast.LENGTH_SHORT).show();
         int userId = bundle.getInt("userId");
         userGreeting(nickname);
 
@@ -124,7 +102,7 @@ public class Favorites extends AppCompatActivity {
                         public void onItemClick(int position) {
                             ExampleItem currentItem = list.get(position);
                             String tvShowName = currentItem.getText1();
-                            Toast.makeText(Favorites.this, tvShowName, Toast.LENGTH_LONG).show();
+
                             //make the request to retrieve the TV show ID for the name we retrieved from the list item we checked
                             restRequests.getShowId(tvShowName, new RestRequests.IDResponseListener() {
                                 @Override
