@@ -1,5 +1,6 @@
 package com.example.tvtracker;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -54,6 +55,11 @@ public class Login extends MainActivity {
         passwordInput = (EditText) findViewById(R.id.passwordSignUp);
         setUsername(usernameInput.getText().toString());
         setPassword(passwordInput.getText().toString());
+
+        //for nickname retrieval
+        SharedPreferences nicknamePref = this.getSharedPreferences("com.example.tvtracker", Context.MODE_PRIVATE);
+        //Toast.makeText(Login.this, usernameString, Toast.LENGTH_SHORT).show();
+        nicknamePref.edit().putString("usernameInput", usernameString).apply();
     }
 
     public void userLogin() {
@@ -73,6 +79,7 @@ public class Login extends MainActivity {
 
             Intent intent = new Intent(this, Favorites.class);
             intent.putExtra("userId", userId);
+            intent.putExtra("usernameInput", usernameString);
             startActivity(intent);
         }
     }

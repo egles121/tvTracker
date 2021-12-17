@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Login"  android:background="@drawable/gradient_background">
+    android:background="@drawable/gradient_background"
+    tools:context=".Login">
 
     <TextView
         android:id="@+id/signin"
@@ -27,21 +28,21 @@
         android:id="@+id/usernameSignUp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/passwordSignUp"
-        app:layout_constraintTop_toBottomOf="@+id/signin"
         android:layout_margin="10dp"
         android:layout_marginTop="56dp"
         android:background="#30000000"
         android:drawableLeft="@drawable/ic_baseline_person_24"
         android:drawablePadding="10dp"
         android:hint="Username"
+        android:lines="1"
+        android:maxLines="1"
         android:padding="20dp"
+        android:singleLine="true"
         android:textColor="@android:color/white"
         android:textColorHint="@android:color/white"
-        tools:layout_editor_absoluteX="26dp"
-        android:maxLines="1"
-        android:lines="1"
-        android:singleLine="true"/>
+        app:layout_constraintBottom_toTopOf="@id/passwordSignUp"
+        app:layout_constraintTop_toBottomOf="@+id/signin"
+        tools:layout_editor_absoluteX="26dp" />
 
     <EditText
         android:id="@+id/passwordSignUp"
@@ -53,17 +54,17 @@
         android:drawableLeft="@drawable/ic_baseline_vpn_key_24"
         android:drawablePadding="10dp"
         android:hint="Password"
+        android:inputType="textPassword"
+        android:lines="1"
+        android:maxLines="1"
         android:padding="20dp"
+        android:singleLine="true"
         android:textColor="@android:color/white"
         android:textColorHint="@android:color/white"
-        app:layout_constraintTop_toBottomOf="@+id/usernameSignUp"
         app:layout_constraintBottom_toTopOf="@+id/button_loginScreen"
+        app:layout_constraintTop_toBottomOf="@+id/usernameSignUp"
         app:layout_constraintVertical_bias="0.1"
-        tools:layout_editor_absoluteX="10dp"
-        android:inputType="textPassword"
-        android:maxLines="1"
-        android:lines="1"
-        android:singleLine="true"/>
+        tools:layout_editor_absoluteX="10dp" />
 
     <Button
         android:id="@+id/button_loginScreen"
@@ -71,9 +72,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="81dp"
         android:layout_marginBottom="208dp"
+        android:backgroundTint="#341d7e"
         android:text="LOG IN"
         android:textColor="@android:color/white"
-        android:backgroundTint="#341d7e"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
