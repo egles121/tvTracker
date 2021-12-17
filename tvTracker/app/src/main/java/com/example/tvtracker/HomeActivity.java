@@ -6,12 +6,16 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckedTextView;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tvtracker.DB.User_dataQuery;
@@ -32,12 +36,20 @@ public class HomeActivity extends AppCompatActivity {
 
         Button favorites = (Button) findViewById(R.id.button_home_fav);
         favorites.setOnClickListener(v -> favoritesScreen(userId, username));
+        EditText search = (EditText) findViewById(R.id.search);
+
+        ImageButton searchButton = (ImageButton) findViewById(R.id.button_search);
 
         ListView list = (ListView) findViewById(R.id. home_listView) ;
 
         RestRequests restRequests = new RestRequests(HomeActivity.this);
 
-        restRequests.getTvShowList("a", new RestRequests.TvShowListResponse() {
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String searchValue = search.getText().toString();
+                Toast.makeText(HomeActivity.this, searchValue, Toast.LENGTH_LONG).show();
+            restRequests.getTvShowList(searchValue, new RestRequests.TvShowListResponse() {
             @Override
             public void onError(String message) {
                 Toast.makeText(HomeActivity.this, "error", Toast.LENGTH_LONG).show();
@@ -51,6 +63,8 @@ public class HomeActivity extends AppCompatActivity {
 
             }
         });
+
+
 
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -95,6 +109,9 @@ public class HomeActivity extends AppCompatActivity {
                 }
             }
         });
+            }
+        });
+
 
 
     }
