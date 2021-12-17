@@ -4,14 +4,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.tvtracker.DB.UserQuery;
-import com.example.tvtracker.DB.Users;
 
 public class Login extends MainActivity {
     private Button login;
@@ -58,7 +56,6 @@ public class Login extends MainActivity {
 
         //for nickname retrieval
         SharedPreferences nicknamePref = this.getSharedPreferences("com.example.tvtracker", Context.MODE_PRIVATE);
-        //Toast.makeText(Login.this, usernameString, Toast.LENGTH_SHORT).show();
         nicknamePref.edit().putString("usernameInput", usernameString).apply();
     }
 
