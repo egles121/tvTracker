@@ -1,33 +1,20 @@
 package com.example.tvtracker;
 
+import android.os.Bundle;
+import android.widget.CheckBox;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.tvtracker.DB.User_dataQuery;
 import com.example.tvtracker.REST.RestRequests;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.Map;
-import java.util.Set;
 
 public class TvShowDetails extends AppCompatActivity {
     private RecyclerView mRecyclerView;
@@ -52,8 +39,7 @@ public class TvShowDetails extends AppCompatActivity {
 
         ArrayList<TvShowItem> tvEpisodes = new ArrayList<TvShowItem>();
 
-        SharedPreferences sharedPref = getSharedPreferences("userPref", TvShowDetails.this.MODE_PRIVATE);
-        int tvShowId = sharedPref.getInt("tvShowId", 0);
+        int tvShowId = bundle.getInt("tvShowId");
 
         RestRequests restRequests = new RestRequests(TvShowDetails.this);
 
