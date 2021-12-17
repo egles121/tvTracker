@@ -58,6 +58,8 @@ public class Favorites extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         String nickname = bundle.getString("usernameInput");
+        Toast.makeText(Favorites.this, nickname, Toast.LENGTH_SHORT).show();
+        int userId = bundle.getInt("userId");
         userGreeting(nickname);
 
         logout = (Button) findViewById(R.id.button_logoutFavorites);
@@ -67,12 +69,9 @@ public class Favorites extends AppCompatActivity {
         notifications.setOnClickListener(v -> userNotifications());
 
         main = (Button) findViewById(R.id.button_mainFav);
-        main.setOnClickListener(v -> mainScreen());
+        main.setOnClickListener(v -> mainScreen(userId, nickname));
 
         mRecyclerView = findViewById(R.id.favorite_recycler);
-
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(Favorites.this);
-        int userId = sharedPref.getInt("userId", 0);
 
         //Return a TV show name
         RestRequests restRequests = new RestRequests(Favorites.this);
@@ -136,13 +135,10 @@ public class Favorites extends AppCompatActivity {
                                 @Override
                                 public void onResponse(int id) {
                                     //go to TV show page
-                                    Toast.makeText(Favorites.this, "The ID is " + String.valueOf(id), Toast.LENGTH_LONG).show();
-
-                                    SharedPreferences.Editor editor = sharedPref.edit();
-                                    editor.putInt("tvShowId", id);
-                                    editor.apply();
 
                                     Intent intent = new Intent(Favorites.this, TvShowDetails.class);
+                                    intent.putExtra("userId", userId);
+                                    intent.putExtra("tvShowId", id);
                                     startActivity(intent);
                                 }
                             });
@@ -158,8 +154,8 @@ public class Favorites extends AppCompatActivity {
         greeting = (TextView) findViewById(R.id.greeting);
         Calendar c = Calendar.getInstance();
         int currentTime = c.get(Calendar.HOUR_OF_DAY);
-        TextView nickname = (TextView) findViewById(R.id.greeting2);
-        nickname.setText(name);
+        TextView nick = (TextView) findViewById(R.id.greeting2);
+        nick.setText(name);
 
         if (currentTime >= 5 && currentTime < 10) {
             greeting.setText("Good morning,");
@@ -186,8 +182,10 @@ public class Favorites extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void mainScreen() {
+    public void mainScreen(int userId, String username) {
         Intent intent = new Intent(this, HomeActivity.class);
+        intent.putExtra("userId", userId);
+        intent.putExtra("usernameInput", username);
         startActivity(intent);
     }
 

@@ -28,9 +28,10 @@ public class HomeActivity extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         int userId = bundle.getInt("userId");
+        String username = bundle.getString("usernameInput");
 
         Button favorites = (Button) findViewById(R.id.button_home_fav);
-        favorites.setOnClickListener(v -> favoritesScreen(userId));
+        favorites.setOnClickListener(v -> favoritesScreen(userId, username));
 
         ListView list = (ListView) findViewById(R.id. home_listView) ;
 
@@ -61,10 +62,6 @@ public class HomeActivity extends AppCompatActivity {
                     //get the string value of TV show name from each list item
                     String selected = (String) (list.getItemAtPosition(position));
 
-                    //access the userID of the user that is using the app currently
-                    SharedPreferences sharedPref = getSharedPreferences("userPref", HomeActivity.this.MODE_PRIVATE);
-                    //int userId = sharedPref.getInt("userId", 0);
-
                     //make the request to retrieve the TV show ID for the name we retrieved from the list item we checked
                     restRequests.getShowId(selected, new RestRequests.IDResponseListener() {
                         @Override
@@ -81,10 +78,6 @@ public class HomeActivity extends AppCompatActivity {
                 } else {
                     //get the string value of TV show name from each list item we unselect
                     String unselected = (String) (list.getItemAtPosition(position));
-
-                    //access the userID of the user that is using the app currently
-                    SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(HomeActivity.this);
-                    //int userId = sharedPref.getInt("userId", 0);
 
                     //make the request to retrieve the TV show ID for the name we retrieved from the list item we checked
                     restRequests.getShowId(unselected, new RestRequests.IDResponseListener() {
@@ -106,9 +99,10 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
-    public void favoritesScreen(int userId) {
+    public void favoritesScreen(int userId, String username) {
         Intent intent = new Intent (this, Favorites.class);
         intent.putExtra("userId", userId);
+        intent.putExtra("usernameInput", username);
         startActivity(intent);
     }
 
